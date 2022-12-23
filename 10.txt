@@ -1,0 +1,61 @@
+#include <iostream>
+
+
+class Zoo
+{
+	Animal* animals;
+	int len;
+	
+public:
+	Zoo(int l, Animal* an)
+	{
+		len = l;
+		animals = an;
+		std::cout << "Зоопарк создан";
+	}
+	std::string animal_place(std::string name)
+	{
+		
+		return animals[find_by_name(name)].place;
+	}
+private:
+	int find_by_name(std::string name)
+	{
+		for (int i = 0; i < len; i++)
+		{
+			if (animals[i].name == name)
+			{
+				return i;
+			}
+		}
+	}
+};
+
+class Animal
+{
+public:
+	std::string name = "";
+	std::string place = "";
+
+public:
+	Animal(std::string name, std::string place)
+	{
+		std::cout << "Constructor works!" << std::endl;
+	}
+
+	~Animal()
+	{
+		std::cout << "Deconstructor works!" << std::endl;
+	}
+};
+
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	Animal first("'name'", "'place'");
+	Animal second("n", "p");
+	Animal* ani[2] = [first, second];
+	Zoo fir(2, first);
+	std::cout << fir.animal_place("'name'");
+}
